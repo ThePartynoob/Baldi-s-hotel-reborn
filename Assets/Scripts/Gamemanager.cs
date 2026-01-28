@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class Gamemanager : MonoBehaviour
 {
     static public int seed = 0;
+    public int seedOverride = 0;
+    public bool OverrideSeed = false;
     public System.Random rng;
     public RoomType[] RoomTypes;
     public RoomType CurrentRoomType;
@@ -17,6 +19,10 @@ public class Gamemanager : MonoBehaviour
     private void Awake()
     {
         seed = Random.Range(int.MinValue, int.MaxValue);
+        if (OverrideSeed)
+        {
+            seed = seedOverride;
+        }
         rng = new System.Random(seed);
 
 
@@ -101,6 +107,7 @@ public class Room
     public Transform Entrance;
     public Transform Exit;
     public int Weight = 100;
+    public bool HasHidingSpot = false;
 
 
 

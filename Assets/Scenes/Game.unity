@@ -9562,6 +9562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fde1eccde927414982b2dddaf751569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  seedOverride: 0
+  OverrideSeed: 1
   RoomTypes:
   - Name: Normal
     Rooms:
@@ -9569,10 +9571,12 @@ MonoBehaviour:
       Entrance: {fileID: 2139128541}
       Exit: {fileID: 1327770822}
       Weight: 100
+      HasHidingSpot: 0
     - RoomObject: {fileID: 6256986173403374007}
       Entrance: {fileID: 1642363583194416607}
       Exit: {fileID: 7784167287339269313}
       Weight: 5
+      HasHidingSpot: 0
     Weight: 100
   CurrentRoomType:
     Name: 
