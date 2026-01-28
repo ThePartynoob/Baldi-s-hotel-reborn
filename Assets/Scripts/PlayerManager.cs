@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -7,7 +8,16 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private InputActionReference InteractAction;
 
+    [SerializeField] private InputActionReference SprintAction;
+
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float runSpeed = 5f;
+
+    public Slider staminabar;
+
+    private float stamina = 100f;
+
+    private bool isSprinting = false;
 
     [SerializeField]
     [Range(0,1)]
@@ -20,6 +30,7 @@ public class PlayerManager : MonoBehaviour
     {
         MoveAction.action.Enable();
         InteractAction.action.Enable();
+        SprintAction.action.Enable();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -33,12 +44,26 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        staminabar.value = stamina;
+        
+        if (SprintAction.action.IsPressed() && stamina > 0)
+        {
+            isSprinting = true;
+            stamina = Mathf.Clamp(stamina - 20f * Time.deltaTime, 0, 100f);
+        }
+        else
+        {
+            isSprinting = false;
+            stamina = Mathf.Clamp(stamina + 10f * Time.deltaTime, 0, 100f);
+        }
+        stamina = Mathf.Clamp(stamina, 0, 100f);
+
         Vector2 MoveVelocity = MoveAction.action.ReadValue<Vector2>();
         Vector2 DeltaCursorMove = Mouse.current.delta.ReadValue();
         CharacterController rb = GetComponent<CharacterController>();
         Velocity = Vector2.Lerp(Velocity, MoveVelocity, acceleration);
-
-        Vector3 move = new Vector3(Velocity.x, 0, Velocity.y) * moveSpeed * Time.deltaTime;
+        var speed = isSprinting ? runSpeed : moveSpeed;
+        Vector3 move = new Vector3(Velocity.x, 0, Velocity.y) * speed * Time.deltaTime;
         transform.Rotate(0, DeltaCursorMove.x * mouseSensitivity, 0);
         rb.Move(transform.TransformDirection(move));
         if (InteractAction.action.WasPressedThisFrame())
