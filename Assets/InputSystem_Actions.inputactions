@@ -266,11 +266,11 @@
                 },
                 {
                     "name": "",
-                    "id": "c7e4b773-b0dd-4db2-bcb6-3f0245f43c1b",
+                    "id": "26476f64-7e6e-4b9a-8a11-6fe1603bcf6b",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false

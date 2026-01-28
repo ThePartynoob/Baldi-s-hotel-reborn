@@ -4737,7 +4737,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 04fd783ddbcdb4c4595a0711a4394ae7, type: 2}
+  - {fileID: 2100000, guid: 6b9d8654c9b4ce246b2b497fe767ebbe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9493,7 +9493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorManager
   DoorOpened: {fileID: 2100000, guid: 8ebfa82d84e30e1438c78dc5b8fffaad, type: 2}
-  DoorClosed: {fileID: 2100000, guid: 04fd783ddbcdb4c4595a0711a4394ae7, type: 2}
+  DoorClosed: {fileID: 2100000, guid: 6b9d8654c9b4ce246b2b497fe767ebbe, type: 2}
   DoorSounds:
   - {fileID: 8300000, guid: 08173dc9fbf391a479bf9426b16b37c3, type: 3}
   OtherSideDoor: {fileID: 822495736}
@@ -9544,7 +9544,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 04fd783ddbcdb4c4595a0711a4394ae7, type: 2}
+  - {fileID: 2100000, guid: 6b9d8654c9b4ce246b2b497fe767ebbe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11565,10 +11565,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 842884603155751683, guid: f36be408040ce7f4b83f8e7de5ed9aae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b9d8654c9b4ce246b2b497fe767ebbe, type: 2}
     - target: {fileID: 2671445485227733653, guid: f36be408040ce7f4b83f8e7de5ed9aae, type: 3}
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 6577880451598304674, guid: f36be408040ce7f4b83f8e7de5ed9aae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b9d8654c9b4ce246b2b497fe767ebbe, type: 2}
     - target: {fileID: 7004187457918921503, guid: f36be408040ce7f4b83f8e7de5ed9aae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 300
@@ -11613,6 +11621,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 7917704886683575150, guid: f36be408040ce7f4b83f8e7de5ed9aae, type: 3}
+      propertyPath: DoorClosed
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b9d8654c9b4ce246b2b497fe767ebbe, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
