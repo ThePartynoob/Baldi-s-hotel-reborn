@@ -10,6 +10,8 @@ public class DoorManager : MonoBehaviour
     bool State = false;
     public AudioClip[] DoorSounds;
 
+    public bool IsExitdoor = false;
+
     public GameObject OtherSideDoor;
     void Start()
     {
@@ -38,6 +40,10 @@ public class DoorManager : MonoBehaviour
             audio.Play();
             Collider collider = GetComponent<Collider>();
             collider.enabled = false;
+            if (IsExitdoor)
+            {
+                Gamemanager.Instance.UpdateRoomNumber(Gamemanager.Instance.CurrentRoomNumber + 1);
+            }
 
         }
     }

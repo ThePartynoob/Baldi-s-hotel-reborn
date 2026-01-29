@@ -392,8 +392,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1166,7 +1166,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: <color=green><size=130>Baldi's</size></color> <color=blue>Hotel</color>
-    <color=red>reborn</color>
+    <color=red>reborn</color> <size=60>demo 1</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6725,7 +6725,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7333,6 +7333,8 @@ MonoBehaviour:
   - Press <b>Shift</b> to run.
   - Walk in diagonal to go just a bit fast- oh wait i fixed that silly me :3
   - I know where you live. (ur on earth, dont lie)
+  - You should not stay in lockers for too long
+  - If you dont see a locked and it comes, <color=red>RUN TILL YOU SEE ONE</color>
   chosentip: 
   Panel: {fileID: 1489723048}
   LoadingText: {fileID: 1573802888}

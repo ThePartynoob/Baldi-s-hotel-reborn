@@ -357,6 +357,7 @@ MonoBehaviour:
   DoorClosed: {fileID: 2100000, guid: 6b9d8654c9b4ce246b2b497fe767ebbe, type: 2}
   DoorSounds:
   - {fileID: 8300000, guid: 08173dc9fbf391a479bf9426b16b37c3, type: 3}
+  IsExitdoor: 1
   OtherSideDoor: {fileID: 3658158170902043420}
 --- !u!82 &4449534866106045212
 AudioSource:

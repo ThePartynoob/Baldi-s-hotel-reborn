@@ -131,6 +131,7 @@ MonoBehaviour:
   DoorClosed: {fileID: 2100000, guid: 6b9d8654c9b4ce246b2b497fe767ebbe, type: 2}
   DoorSounds:
   - {fileID: 8300000, guid: 08173dc9fbf391a479bf9426b16b37c3, type: 3}
+  IsExitdoor: 0
   OtherSideDoor: {fileID: 3589364942643662342}
 --- !u!82 &6646894771355897373
 AudioSource:
@@ -4969,6 +4970,7 @@ MonoBehaviour:
   DoorClosed: {fileID: 2100000, guid: 6b9d8654c9b4ce246b2b497fe767ebbe, type: 2}
   DoorSounds:
   - {fileID: 8300000, guid: 08173dc9fbf391a479bf9426b16b37c3, type: 3}
+  IsExitdoor: 1
   OtherSideDoor: {fileID: 4407534368774551918}
 --- !u!82 &1815845512100963632
 AudioSource:
@@ -10970,7 +10972,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8123590878703236840}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: 569.99994, y: 10, z: -10}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
