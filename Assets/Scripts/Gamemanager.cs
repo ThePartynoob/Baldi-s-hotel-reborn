@@ -13,6 +13,7 @@ public class Gamemanager : MonoBehaviour
     [SerializeField]
     static public int seed = 0;
     public int seedOverride = 0;
+    public GameObject gameover;
     public bool OverrideSeed = false;
     public System.Random rng;
     public RoomType[] RoomTypes;
@@ -32,8 +33,8 @@ public class Gamemanager : MonoBehaviour
     bool[] debugs = { false };
     public GameObject HideText;
     public GameObject[] EntityPrefabs;
-
-    bool debugmode = false;
+    public AudioClip[] Ambiances;
+    public bool debugmode = false;
     public PlayerManager PM;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -77,7 +78,7 @@ public class Gamemanager : MonoBehaviour
 
         CurrentRoomType = GetNextRoomType();
         RoomsWhenToSwitchRoomTypes = new List<int>();
-        for (int i = 0; i < rng.Next(1,5); i++)
+        for (int i = 0; i < rng.Next(1,8); i++)
         {
             RoomsWhenToSwitchRoomTypes.Add(rng.Next(10, RoomsToGenerate-5));
         }
@@ -89,7 +90,13 @@ public class Gamemanager : MonoBehaviour
         {
             if (RoomsWhenToSwitchRoomTypes.Contains(i))
             {
-                CurrentRoomType = GetNextRoomType();
+                
+                var temp = GetNextRoomType();
+                while (temp == CurrentRoomType)
+                {
+                    temp = GetNextRoomType();
+                }
+                CurrentRoomType = temp;
             }
             
             Room NextRoom = GetNextRoom(CurrentRoomType);
@@ -109,17 +116,38 @@ public class Gamemanager : MonoBehaviour
         }
 
 
-        foreach (var item in Rooms)
-        {
-            Debug.DrawLine(item.Find("Entrance").position, item.Find("Exit").position, Color.red,Int32.MaxValue);
-            
-        }
+  
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateDebugs();
+    }
+
+    int HowMuchBeforeNextCloset()
+    {
+        var i = 0;
+        foreach (var item in Rooms)
+        {
+            if (i < CurrentRoomNumber)
+            {
+                continue;
+            } else
+            {
+                for (int j = 0; j < item.childCount; j++)
+                {
+                    if (item.GetChild(j).tag == "Closet")
+                    {
+                       
+                        return i - CurrentRoomNumber;
+                    }
+                }
+            }
+            i++;
+        }
+        return -1;
+
     }
 
     IEnumerator Event(int door)
@@ -151,13 +179,15 @@ public class Gamemanager : MonoBehaviour
             HideText.SetActive(true);
             Instantiate(GetRandomEntity());
             reverb.reverbPreset = AudioReverbPreset.SewerPipe;
-            Ambiance.Play();
+            StartCoroutine(PlayRandomAmbiance());
             yield return new WaitForSeconds(5f);
             HideText.SetActive(false);
         }
 
         if (door > FirstEntitySpawnAt + 4) {
-            if (rng.Next(0, 100) < 20)
+            var e = HowMuchBeforeNextCloset();
+            Debug.Log("Doors before next closet: " + e.ToString());
+            if (rng.Next(0, 100) < 35 && e < 3)
             {
                 yield return new WaitForSeconds(rng.Next(0,20)/10f);
                 Instantiate(GetRandomEntity());
@@ -176,6 +206,18 @@ public class Gamemanager : MonoBehaviour
 
         StartCoroutine(Event(CurrentRoomNumber));
 
+    }
+
+    IEnumerator PlayRandomAmbiance()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(rng.Next(10, 20));
+            Ambiance.clip = Ambiances[rng.Next(0, Ambiances.Length)];
+            Ambiance.Play();
+            
+            yield return new WaitForSeconds(Ambiance.clip.length);
+        }
     }
 
     
@@ -232,8 +274,6 @@ public class Gamemanager : MonoBehaviour
 public class Room
 {
     public Transform RoomObject;
-    public Transform Entrance;
-    public Transform Exit;
     public int Weight = 100;
     public bool HasHidingSpot = false;
 

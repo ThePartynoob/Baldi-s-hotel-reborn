@@ -18,14 +18,14 @@ public class PlayerManager : MonoBehaviour
 
     public Slider staminabar;
     public Slider hidebar;
-
+    public GameObject InteractText;
     public float stamina = 100f;
 
     private bool isSprinting = false;
     private bool isMoving = false;
     public bool isHidden { get; private set; } = false;
     [SerializeField]
-    [Range(0,1)]
+    [Range(0, 1)]
     private float acceleration = 0.1f;
     private float timeelapsed = 0f;
     public float mouseSensitivity = 2.0f;
@@ -61,17 +61,18 @@ public class PlayerManager : MonoBehaviour
         PC.transform.localPosition = new Vector3(0, 1f, 0);
         PC.transform.rotation = transform.rotation;
     }
-  
+
     // Update is called once per frame
     void Update()
     {
+
         staminabar.value = stamina;
         if (isHidden)
         {
             if (Gamemanager.Instance.CurrentRoomNumber >= 40)
             {
-                HideTime -= Time.deltaTime*2.5f;
-                
+                HideTime -= Time.deltaTime * 2.5f;
+
             }
             else
             {
@@ -81,9 +82,10 @@ public class PlayerManager : MonoBehaviour
             {
                 isHidden = false;
                 Unhide();
-                
+
             }
-        } else
+        }
+        else
         {
             HideTime = Mathf.Clamp(HideTime + 0.35f * Time.deltaTime, 0f, 10f);
         }
@@ -91,7 +93,8 @@ public class PlayerManager : MonoBehaviour
         if (hidebar.value >= 10f)
         {
             hidebar.gameObject.SetActive(false);
-        } else
+        }
+        else
         {
             hidebar.gameObject.SetActive(true);
         }
@@ -107,7 +110,7 @@ public class PlayerManager : MonoBehaviour
         }
         if (!isMoving)
         {
-            stamina = Mathf.Clamp(stamina + 35f * Time.deltaTime, 0, 100f);
+            stamina = Mathf.Clamp(stamina + 7.5f * Time.deltaTime, 0, 100f);
         }
         stamina = Mathf.Clamp(stamina, 0, 100f);
 
@@ -118,27 +121,29 @@ public class PlayerManager : MonoBehaviour
         {
             Velocity = Vector2.Lerp(Velocity, MoveVelocity, acceleration);
         }
-        if (Velocity.sqrMagnitude >0)
+        if (Velocity.sqrMagnitude > 0)
         {
             isMoving = true;
-        } else
+        }
+        else
         {
             isMoving = false;
         }
-            var speed = isSprinting ? runSpeed : moveSpeed;
-        timeelapsed += (isSprinting ? 5f : isMoving ? 2.5f : 0.125f) * Time.deltaTime ;
+        var speed = isSprinting ? runSpeed : moveSpeed;
+        timeelapsed += (isSprinting ? 5f : isMoving ? 2.5f : 0.125f) * Time.deltaTime;
         Vector3 move = new Vector3(Velocity.x, 0, Velocity.y) * speed * Time.deltaTime;
         if (!isHidden)
         {
             PC.transform.localPosition = new Vector3(0, 1f + Mathf.Sin(timeelapsed * 2.5f) * 0.2f, 0);
             transform.Rotate(0, DeltaCursorMove.x * mouseSensitivity, 0);
         }
-        
+
         rb.Move(transform.TransformDirection(move));
-        if (InteractAction.action.WasPressedThisFrame())
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 20f))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 20f))
+            if (InteractAction.action.WasPressedThisFrame())
             {
                 DoorManager door = hit.collider.GetComponent<DoorManager>();
                 if (door != null)
@@ -151,7 +156,7 @@ public class PlayerManager : MonoBehaviour
                     isHidden = !isHidden;
                     Velocity = Vector2.zero;
                     if (isHidden)
-                        {
+                    {
                         Hide(hit);
                     }
                     else
@@ -162,7 +167,9 @@ public class PlayerManager : MonoBehaviour
 
                 }
             }
-        }
-
+            
     }
+
+
+}
 }

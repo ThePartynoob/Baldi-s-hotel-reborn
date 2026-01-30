@@ -13,6 +13,7 @@ public class EntityManager : MonoBehaviour
     Vector3 EndPos;
     float speed = 125f;
     
+    
     void Start()
     {
         transform.position = SpawnPos;
@@ -51,8 +52,10 @@ public class EntityManager : MonoBehaviour
         {
             if (hit.collider.GetComponent<PlayerManager>() && !Gamemanager.Instance.PM.isHidden)
             {
+                Gamemanager.Instance.gameover.SetActive(true);
+                SceneManager.LoadScene("GameOver");
                 Debug.Log("Entity " + EntityId.ToString() + " caught the player!");
-                SceneManager.LoadScene("Menu");
+                
             }
         }
     }

@@ -7,10 +7,12 @@ public class DoorManager : MonoBehaviour
     public Material DoorOpened;
 
     public Material DoorClosed;
-    bool State = false;
+    public bool State = false;
     public AudioClip[] DoorSounds;
 
     public bool IsExitdoor = false;
+
+    
 
     public GameObject OtherSideDoor;
     void Start()
